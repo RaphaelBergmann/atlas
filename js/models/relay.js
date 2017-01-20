@@ -192,7 +192,6 @@ define([
                     relay.as_name = relay.as_name ? relay.as_name : null;
                     relay.transports = relay.transports ? relay.transports : null;
                     relay.fingerprint = relay.hashed_fingerprint ? relay.hashed_fingerprint : relay.fingerprint;
-                    relay.fingerprint = relay.fingerprint.replace(/(.{20})/g,"$1&#8203;");
                     model.set({badexit: false});
                     var size = ['16x16', '14x16', '8x16'];
                     relay.flags = model.parseflags(relay.flags, size);
