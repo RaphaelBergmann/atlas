@@ -72,7 +72,7 @@
     <% } %>
 
     <dt><span class="tip" title="20-byte unique identifier of the relay." data-original-title="Fingerprint">Fingerprint</span></dt>
-    <dd><pre><%= relay.get('fingerprint') %></pre></dd>
+    <dd class="fingerprint"><pre class="force-select"><%= relay.get('fingerprint') %></pre></dd>
 
     <dt><span class="tip" title="Flags that the directory authorities assigned to this relay." data-original-title="Relay flags">Flags</span></dt>
     <dd><% _.each(relay.get('flags'), function(flag) { %>
