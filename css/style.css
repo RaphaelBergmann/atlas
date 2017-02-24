@@ -66,3 +66,11 @@ span.flags img {
 .tooltip * {
     text-align:left;
 }
+
+.force-select {  
+  -webkit-user-select: all;  /* Chrome 49+ */
+  -moz-user-select: all;     /* Firefox 43+ */
+  -ms-user-select: all;      /* No support yet */
+  user-select: all;          /* Likely future */   
+  font-weight:normal;
+}
