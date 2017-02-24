@@ -73,4 +73,5 @@ span.flags img {
   -ms-user-select: all;      /* No support yet */
   user-select: all;          /* Likely future */   
   font-weight:normal;
+  padding:8px 6px 8px 5px;
 }
