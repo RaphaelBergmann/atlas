@@ -72,6 +72,10 @@ span.flags img {
     top:60px;
 }
 
+tr.down td img.flags {
+    opacity:0.3;
+}
+
 dd {
     margin-left: 0;
     margin-bottom: 1.2em;

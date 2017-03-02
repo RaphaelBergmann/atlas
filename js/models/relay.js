@@ -198,6 +198,11 @@ define([
                         relay.flags.push("Not Recommended");
                     }
                     relay.flags = model.parseflags(relay.flags, size);
+                    if (relay.running===false) {
+                        relay.flags.forEach(function(item, index, arr){
+                            relay.flags[index][2] += "<br>(Last seen " + relay.uptime_hr + " ago.)";
+                        });
+                    }
                     model.set(relay, options);
                     success(model, relay);
                 } else {
