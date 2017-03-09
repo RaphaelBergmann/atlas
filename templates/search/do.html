@@ -54,12 +54,14 @@
 <table class="table table-bordered table-striped" id="torstatus_results">
 	<thead>
 		<tr>
+			<th style="width:16px;"></th>
 			<th>Nickname</th>
 			<th>Bandwidth</th>
 			<th>Uptime</th>
 			<th>Country</th>
 			<th>IP</th>
 			<th>Flags</th>
+			<th>Properties</th>
 			<th>ORPort</th>
 			<th>DirPort</th>
 			<th>Type</th>
@@ -74,12 +76,19 @@
 		<% } else { %>
 			<tr class="odd">
 		<% } %>
+            <td>
+            <% if (relay.get('running') === false) { %>
+                <img class="tip inline flags" src="img/properties/offline_16x16.png" alt="Currently offline" title="This relay is currently offline."/>
+            <% } else { %>
+                <img class="tip inline flags" src="img/properties/online_16x16.png" alt="Currently running" title="This relay is currently running."/>
+            <% } %>
+            </td>
 			<td>
             <a href="#details/<%= relay.get('fingerprint') %>">
             <%= _.escape(relay.get('nickname')) %>
             </a>
             </td>
-			<td><span data-filter="<%= relay.get('bandwidth') %>"><%= relay.get('bandwidth_hr') %></td>
+			<td><span data-filter="<%= relay.get('bandwidth') %>"><%= relay.get('bandwidth_hr') %></span></td>
 			<td>
             <span data-hidden="<%= relay.get('last_restarted') %>" title="<%= relay.get('uptime_hrfull') %>" data-filter="<%= relay.get('uptime') %>" class="tip uptime">
             <% if (relay.get('running') === false) { %><s><% } %><%= relay.get('uptime_hr') %><% if (relay.get('running') === false) { %></s><% } %>
@@ -96,6 +105,23 @@
             <img class="tip inline flags" src="img/flags/<%= flag[1] %>.png" alt="<%= flag[0] %>" title="<%= flag[0] %><br /><%= flag[2] %>"/>
             <% }); %>
             </td>
+			<td>
+            <% if (relay.get('recommended_version') === false) { %>
+                <img class="tip inline flags" src="img/properties/not_recommended_16x16.png" alt="Not recommended" title="Not recommended<br />This relay is running a software version that is not recommended by the directory authorities."/>
+            <% } %>
+            <% if (false) { %>
+                <img class="tip inline flags" src="img/properties/shirt_16x16.png" alt="T-Shirt" title="T-Shirt<br />This relay would currently qualify for a T-Shirt."/>
+            <% } %>
+            <%
+            ipv6 = false;
+            or_addresses = relay.get('or_addresses');
+            for (var j=0; j<or_addresses.length; j++) {
+                if (or_addresses[j].indexOf(']')>0) ipv6 = true;
+            }
+            if (ipv6) { %>
+                <img class="tip inline flags" src="img/properties/ipv6_16x16.png" alt="IPv6" title="IPv6<br />This relay supports IPv6."/>
+            <% } %>
+            </td>
 			<td><%= relay.get('or_port') %></td>
 			<td><%= relay.get('dir_port') %></td>
 			<td>
@@ -111,6 +137,9 @@
 	</tbody>
 	<tfoot>
 	<tr>
+        <th>
+            &nbsp;
+        </th>
 		<th>
             <input type="text" id="nickname" name="nickname" placeholder="Nickname" class="search_init">
         </th>
@@ -131,6 +160,9 @@
         </th>
 		<th>
             <input type="text" id="flags" name="flags" placeholder="Flags" class="search_init">
+        </th>
+		<th>
+            &nbsp;
         </th>
 		<th>
             <input type="text" id="or_port" name="or_port" placeholder="ORPort" class="search_init span1">
